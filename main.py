@@ -1,22 +1,12 @@
 from typing import Final
-
 from random import choice
-import os
-
 from dotenv import load_dotenv
-
 from telegram import Update
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from telegram.ext import CallbackQueryHandler
-
 from response import getReply
-import json
-
-
-#Load json data from replies.json
-with open('replies.json', 'r', encoding='utf-8') as file:
-    replies = json.load(file)
+import os
 
 #.env file
 load_dotenv()
@@ -25,8 +15,6 @@ Bot_Username: Final = '@TabToss_Bot'
 
 #KGC List
 kgcList = ['Don', 'Joel', 'Imam', 'Qam']
-
-
 
 #Commmands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -39,7 +27,6 @@ async def toss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     personPaying = choice(kgcList)
     reply = getReply(personPaying)
     await update.message.reply_text(reply)
-
 
 
 #main function to start the bot
