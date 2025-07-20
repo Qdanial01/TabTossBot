@@ -1,14 +1,18 @@
 from typing import Final
+
 from random import choice
 import os
+
 from dotenv import load_dotenv
+
 from telegram import Update
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from telegram.ext import CallbackQueryHandler
+
+from response import getReply
 import json
 
-#from response import handle_response
 
 #Load json data from replies.json
 with open('replies.json', 'r', encoding='utf-8') as file:
@@ -33,9 +37,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def toss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     personPaying = choice(kgcList)
-    reply = choice(replies)
-    finalTab = reply.format(personPaying)
-    await update.message.reply_text(finalTab)
+    reply = getReply(personPaying)
+    await update.message.reply_text(reply)
 
 
 
