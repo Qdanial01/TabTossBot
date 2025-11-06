@@ -6,7 +6,7 @@ from random import choice
 
 from dotenv import load_dotenv
 
-from telegram import Update
+from telegram import Update, BotCommand
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 from telegram.ext import Application, CommandHandler, ContextTypes
@@ -123,7 +123,7 @@ async def remove_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     #Parse names for /remove, payloads without commas are treated as a single name
-    tokens = _parse_names_args(update.message.text, remove_command=True)
+    tokens = _parse_names_args(update.message.text)
     if not tokens:
         await update.message.reply_text(
             "Usage: /remove Name1 - pass one or more names (comma or space separated)."
@@ -142,7 +142,7 @@ async def remove_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             missing.append(nm)
     
     if removed:
-        lines = [f"Removed: {', '.join(removed)}", f"Total names now: {len(names)}."]
+        lines = [f"Removed: {', '.join(removed)}", f" Total names now: {len(names)}."]
         if missing:
             lines.append(f"Not found: {', '.join(missing)}")
         await update.message.reply_text("".join(lines))
@@ -172,7 +172,6 @@ async def toss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(reply)
 
 
-
 #main function to start the bot
 if __name__ == '__main__':
     print('Starting bot...')
@@ -186,7 +185,10 @@ if __name__ == '__main__':
     
     persistence = PicklePersistence(filepath='tabtoss.pickle')
 
-    app = Application.builder().token(Bot_Token).persistence(persistence).build()
+    app = ( Application.builder()
+           .token(Bot_Token)
+           .persistence(persistence)
+           .build()) 
 
     #Commands
     app.add_handler(CommandHandler('start', start_command))
