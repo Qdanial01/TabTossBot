@@ -104,14 +104,14 @@ async def add_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         msg_lines.append(f"Added: {', '.join(added)}")
     if skipped:
         msg_lines.append(f"Skipped (already present): {', '.join(skipped)}")
-    msg_lines.append(f"Total names now: {len(names)}. Use /list to view")
+    msg_lines.append(f"Total names: {len(names)}. Use /list to view")
 
     await update.message.reply_text("\n".join(msg_lines))
 
 async def list_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     names = _names_store(context)
     if not names:
-        await update.message.reply_text("The list is empty. Add some the command /add ....")
+        await update.message.reply_text("The list is empty. Add some with the command /add ....")
         return
     lines = [f"{i+1}. {n}" for i, n in enumerate(names)]
     await update.message.reply_text("Current list:\n" + "\n".join(lines))
