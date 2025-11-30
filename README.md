@@ -26,4 +26,4 @@ I opted for storing pre-written reply data in JSON files - that way, it’s easy
 5. On Telegram, add the bot to your group or chat
 
 ## 🖼️ Preview
-![Image](https://github.com/user-attachments/assets/d3cffa04-7df6-40e1-b639-bfd099100cb0)
+![Image](https://github.com/user-attachments/assets/18ef9c1c-f2dd-4fe0-aadd-8c3a0fca5d1a)
