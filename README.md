@@ -24,3 +24,6 @@ I opted for storing pre-written reply data in JSON files - that way, it’s easy
 3. Install dependencies
 4. Run the bot: main.py
 5. On Telegram, add the bot to your group or chat
+
+## 🖼️ Preview
+![Image](https://github.com/user-attachments/assets/d3cffa04-7df6-40e1-b639-bfd099100cb0)
